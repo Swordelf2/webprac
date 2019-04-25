@@ -16,8 +16,8 @@ CREATE TABLE "Clients" (
 	"ClientID" serial NOT NULL,
 	"Type" ClientType NOT NULL,
 	"Name" varchar(60) NOT NULL,
-	"Balance" money NOT NULL,
-    "CreditLimit" money default 100 NOT NULL,
+	"Balance" numeric(8,2) NOT NULL,
+    "CreditLimit" numeric(8,2) default 100 NOT NULL,
     "CreditTime" integer default 5,
 	CONSTRAINT Clients_pk PRIMARY KEY ("ClientID")
 );
@@ -41,7 +41,7 @@ CREATE TABLE "LegalEntities" (
 CREATE TABLE "Credits" (
 	"CreditID" serial NOT NULL,
 	"ClientID" integer NOT NULL,
-	"Sum" money NOT NULL,
+	"Sum" numeric(8,2) NOT NULL,
 	"StartDate" DATE NOT NULL,
 	"EndDate" DATE,
 	CONSTRAINT Credits_pk PRIMARY KEY ("CreditID")
@@ -51,7 +51,7 @@ CREATE TABLE "Credits" (
 CREATE TABLE "Deposits" (
 	"DepositID" serial NOT NULL,
 	"ClientID" integer NOT NULL,
-	"Sum" money NOT NULL,
+	"Sum" numeric(8,2) NOT NULL,
 	"Time" TIMESTAMP NOT NULL,
 	CONSTRAINT Deposits_pk PRIMARY KEY ("DepositID")
 );
@@ -80,7 +80,7 @@ CREATE TABLE "ActivatedServices" (
 CREATE TABLE "Charges" (
 	"ChargeID" serial NOT NULL,
 	"ClientID" integer NOT NULL,
-	"Sum" money NOT NULL,
+	"Sum" numeric(8,2) NOT NULL,
 	"Time" TIMESTAMP NOT NULL,
 	"ServiceID" integer,
 	CONSTRAINT Charges_pk PRIMARY KEY ("ChargeID")
