@@ -1,25 +1,25 @@
-insert into "Clients" values
+insert into Clients values
     (1, 'Individual', 'Архипова Любовь Юрьевна', 250, 100, 5),
     (2, 'Individual', 'Светленко Наталья Степановна', 100, 100, 5),
     (3, 'Individual', 'Горбунов Виталий Петрович', 1000, 100, 5),
-    (4, 'LegalEntity', 'ООО "НародТорг', 5000, 200, 10),
-    (5, 'LegalEntity', 'ООО "Старфиш"', 100, 100, 5);
+    (4, 'LegalEntity', 'ООО НародТорг', 5000, 200, 10),
+    (5, 'LegalEntity', 'ООО Старфиш', 100, 100, 5);
 
-insert into "Individuals" values
+insert into Individuals values
     (1, '02.09.1995', 'f'),
     (2, '30.08.1994', 'f'),
     (3, '28.01.1998', 'm');
 
-insert into "LegalEntities" values
+insert into LegalEntities values
     (4, '1124512538'),
     (5, '5318352925');
 
-insert into "Credits" values
+insert into Credits values
     (1, 5, 100, '27.02.2019', '02.03.2019'),
     (2, 1, 100, '28.02.2019', '03.03.2019');
 
 
-insert into "Deposits" values
+insert into Deposits values
     (1, 1, 100, '26.02.2019 15:05'),
     (2, 2, 250, '25.02.2019 16:14'),
     (3, 3, 100, '15.02.2019 14:55'),
@@ -27,7 +27,7 @@ insert into "Deposits" values
     (5, 4, 4500, '10.02.2019 19:59'),
     (6, 5, 100, '10.02.2019 19:59');
 
-insert into "Services" values
+insert into Services values
     (1, 'Мобильный интернет безлимит',
         'Безлимитный мобильный интернет за 300 руб. в месяц',
         '300 руб/месяц'),
@@ -41,12 +41,12 @@ insert into "Services" values
         'Звонки с поминутной оплатой исходящих и бесплатными входящими',
         'Исходящие: 1 руб/мин; Входящие: бесплатно');
 
-insert into "ActivatedServices" values
+insert into ActivatedServices values
     (2, '9981151015', 1, '25.02.2019 16:48', '25.03.2019 16:48'),
     (3, '9981111011', 2, '15.02.2019 15:10', '15.03.2019 15:10'),
     (1, '9981841814', 3, '14.02.2019 10:00', '14.02.2019 10:00');
 
-insert into "Charges" values
+insert into Charges values
     (1, 2, 300, '25.02.2019 16:48', 1),
     (2, 3, 50, '15.02.2019 15:10', 2),
     (3, 1, 250, '14.02.2019 10:00', 3);
