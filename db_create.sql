@@ -10,72 +10,72 @@ set datestyle to ISO, DMY;
 -- Create Statements
 --
 
-CREATE TABLE Clients (
+CREATE TABLE Client (
 	ClientID serial NOT NULL,
 	Type varchar(12) NOT NULL,
 	Name varchar(60) NOT NULL,
 	Balance numeric(8,2) NOT NULL,
     CreditLimit numeric(8,2) default 100 NOT NULL,
     CreditTime integer default 5,
-	CONSTRAINT Clients_pk PRIMARY KEY (ClientID)
+	CONSTRAINT Client_pk PRIMARY KEY (ClientID)
 );
 
 
-CREATE TABLE Individuals (
+CREATE TABLE Individual (
 	ClientID integer NOT NULL,
 	BirthDate DATE NOT NULL,
 	Gender char(1) NOT NULL,
-	CONSTRAINT Individuals_pk PRIMARY KEY (ClientID)
+	CONSTRAINT Individual_pk PRIMARY KEY (ClientID)
 );
 
 
-CREATE TABLE LegalEntities (
+CREATE TABLE LegalEntity (
 	ClientID integer NOT NULL,
 	INN varchar(12) NOT NULL,
-	CONSTRAINT LegalEntities_pk PRIMARY KEY (ClientID)
+	CONSTRAINT LegalEntity_pk PRIMARY KEY (ClientID)
 );
 
 
-CREATE TABLE Credits (
+CREATE TABLE Credit (
 	CreditID serial NOT NULL,
 	ClientID integer NOT NULL,
 	Sum numeric(8,2) NOT NULL,
 	StartDate DATE NOT NULL,
 	EndDate DATE,
-	CONSTRAINT Credits_pk PRIMARY KEY (CreditID)
+	CONSTRAINT Credit_pk PRIMARY KEY (CreditID)
 );
 
 
-CREATE TABLE Deposits (
+CREATE TABLE Deposit (
 	DepositID serial NOT NULL,
 	ClientID integer NOT NULL,
 	Sum numeric(8,2) NOT NULL,
 	Time TIMESTAMP NOT NULL,
-	CONSTRAINT Deposits_pk PRIMARY KEY (DepositID)
+	CONSTRAINT Deposit_pk PRIMARY KEY (DepositID)
 );
 
 
-CREATE TABLE Services (
+CREATE TABLE Service (
 	ServiceID serial NOT NULL,
     Name varchar(30) NOT NULL,
 	Description varchar(200) NOT NULL,
     TariffDescription varchar(300) NOT NULL,
-	CONSTRAINT Services_pk PRIMARY KEY (ServiceID)
+	CONSTRAINT Service_pk PRIMARY KEY (ServiceID)
 );
 
 
-CREATE TABLE ActivatedServices (
+CREATE TABLE ActivatedService (
     ClientID integer NOT NULL,
 	Number char(10) NOT NULL,
 	ServiceID integer NOT NULL,
 	StartTime timestamp NOT NULL,
     EndTime timestamp,
-    CONSTRAINT ActivatedServices_pk PRIMARY KEY (ClientID, Number,
+    CONSTRAINT ActivatedService_pk PRIMARY KEY (ClientID, Number,
         ServiceID)
 );
 
 
-CREATE TABLE Charges (
+CREATE TABLE Charge (
 	ChargeID serial NOT NULL,
 	ClientID integer NOT NULL,
 	Sum numeric(8,2) NOT NULL,
@@ -85,14 +85,12 @@ CREATE TABLE Charges (
 );
 
 
-CREATE TYPE ContactType AS ENUM ('PhoneNumber', 'E-mail', 'Person');
-
-CREATE TABLE Contacts (
+CREATE TABLE Contact (
 	ContactID serial NOT NULL,
 	ClientID integer NOT NULL,
 	Type varchar(12) NOT NULL,
 	Description varchar(30) NOT NULL,
-	CONSTRAINT Contacts_pk PRIMARY KEY (ContactID)
+	CONSTRAINT Contact_pk PRIMARY KEY (ContactID)
 );
 
 
@@ -106,21 +104,21 @@ CREATE TABLE Contacts (
 -- Foreign Key Constraints Statements
 --
 
-ALTER TABLE Individuals ADD CONSTRAINT Individuals_fk0 FOREIGN KEY (ClientID) REFERENCES Clients(ClientID);
+ALTER TABLE Individual ADD CONSTRAINT Individual_fk0 FOREIGN KEY (ClientID) REFERENCES Client(ClientID);
 
-ALTER TABLE LegalEntities ADD CONSTRAINT LegalEntities_fk0 FOREIGN KEY (ClientID) REFERENCES Clients(ClientID);
-
-
-ALTER TABLE Credits ADD CONSTRAINT Credits_fk0 FOREIGN KEY (ClientID) REFERENCES Clients(ClientID);
-
-ALTER TABLE Deposits ADD CONSTRAINT Deposits_fk0 FOREIGN KEY (ClientID) REFERENCES Clients(ClientID);
-
-ALTER TABLE ActivatedServices ADD CONSTRAINT ActivatedServices_fk0 FOREIGN KEY (ClientID) REFERENCES Clients(ClientID);
-ALTER TABLE ActivatedServices ADD CONSTRAINT ActivatedServices_fk1 FOREIGN KEY (ServiceID) REFERENCES Services(ServiceID);
+ALTER TABLE LegalEntity ADD CONSTRAINT LegalEntity_fk0 FOREIGN KEY (ClientID) REFERENCES Client(ClientID);
 
 
-ALTER TABLE Charges ADD CONSTRAINT Charges_fk0 FOREIGN KEY (ClientID) REFERENCES Clients(ClientID);
-ALTER TABLE Charges ADD CONSTRAINT Charges_fk1 FOREIGN KEY (ServiceID) REFERENCES Services(ServiceID);
+ALTER TABLE Credit ADD CONSTRAINT Credit_fk0 FOREIGN KEY (ClientID) REFERENCES Client(ClientID);
 
-ALTER TABLE Contacts ADD CONSTRAINT Contacts_fk0 FOREIGN KEY (ClientID) REFERENCES Clients(ClientID);
+ALTER TABLE Deposit ADD CONSTRAINT Deposit_fk0 FOREIGN KEY (ClientID) REFERENCES Client(ClientID);
+
+ALTER TABLE ActivatedService ADD CONSTRAINT ActivatedService_fk0 FOREIGN KEY (ClientID) REFERENCES Client(ClientID);
+ALTER TABLE ActivatedService ADD CONSTRAINT ActivatedService_fk1 FOREIGN KEY (ServiceID) REFERENCES Service(ServiceID);
+
+
+ALTER TABLE Charge ADD CONSTRAINT Charge_fk0 FOREIGN KEY (ClientID) REFERENCES Client(ClientID);
+ALTER TABLE Charge ADD CONSTRAINT Charge_fk1 FOREIGN KEY (ServiceID) REFERENCES Service(ServiceID);
+
+ALTER TABLE Contact ADD CONSTRAINT Contact_fk0 FOREIGN KEY (ClientID) REFERENCES Client(ClientID);
 
