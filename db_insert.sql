@@ -9,14 +9,6 @@ insert into Contact (Client_id, Type, Description) values
     (1, 'e', 'lubov99@mail.ru'),
     (2, 'e', 'natalia1983ab@gmail.com');
 
-insert into Individual values
-    (1, '02.09.1995', 'f'),
-    (2, '30.08.1994', 'f'),
-    (3, '28.01.1998', 'm');
-
-insert into LegalEntity values
-    (4, '1124512538'),
-    (5, '5318352925');
 
 insert into Credit (Client_id, Sum, StartDate, EndDate) values
     (5, 100, '27.02.2019', '02.03.2019'),

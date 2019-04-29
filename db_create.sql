@@ -21,21 +21,6 @@ CREATE TABLE Client (
 );
 
 
-CREATE TABLE Individual (
-	Client_id integer NOT NULL,
-	BirthDate DATE NOT NULL,
-	Gender char(1) NOT NULL,
-	CONSTRAINT Individual_pk PRIMARY KEY (Client_id)
-);
-
-
-CREATE TABLE LegalEntity (
-	Client_id integer NOT NULL,
-	INN varchar(12) NOT NULL,
-	CONSTRAINT LegalEntity_pk PRIMARY KEY (Client_id)
-);
-
-
 CREATE TABLE Credit (
 	Id serial NOT NULL,
 	Client_id integer NOT NULL,
@@ -103,11 +88,6 @@ CREATE TABLE Contact (
 --
 -- Foreign Key Constraints Statements
 --
-
-ALTER TABLE Individual ADD CONSTRAINT Individual_fk0 FOREIGN KEY (Client_id) REFERENCES Client(Id);
-
-ALTER TABLE LegalEntity ADD CONSTRAINT LegalEntity_fk0 FOREIGN KEY (Client_id) REFERENCES Client(Id);
-
 
 ALTER TABLE Credit ADD CONSTRAINT Credit_fk0 FOREIGN KEY (Client_id) REFERENCES Client(Id);
 

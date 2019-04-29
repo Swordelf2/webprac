@@ -1,13 +1,15 @@
+import dao.ClientDao;
+import entities.Client;
 import org.hibernate.Session;
 import utils.HibernateUtils;
 
 public class Main {
 
     public static void main(final String[] args) throws Exception {
-        Session session = HibernateUtils.getSession();
-        session.beginTransaction();
+        ClientDao clientDao = new ClientDao();
+        Client client = clientDao.get(1);
+        client.setName("Tralivali name");
 
-        session.getTransaction().commit();
-        session.close();
+        clientDao.update(client);
     }
 }
