@@ -12,6 +12,20 @@ public class Contact {
     @ManyToOne
     private Client client;
 
+    public Contact() {
+    }
+
+    public Contact(String type, String description) {
+        this.type = type;
+        this.description = description;
+    }
+
+    public Contact(String type, String description, Client client) {
+        this.type = type;
+        this.description = description;
+        client.addContact(this);
+    }
+
     /* Getters and setters */
     public int getId() {
         return id;

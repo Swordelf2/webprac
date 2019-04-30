@@ -18,6 +18,23 @@ public class Activatedservice implements Serializable {
     private Timestamp starttime;
     private Timestamp endtime;
 
+    public Activatedservice() {
+    }
+
+    public Activatedservice(String number, Timestamp starttime, Timestamp endtime) {
+        this.number = number;
+        this.starttime = starttime;
+        this.endtime = endtime;
+    }
+
+    public Activatedservice(Client client, String number, Service service, Timestamp starttime, Timestamp endtime) {
+        this.number = number;
+        this.starttime = starttime;
+        this.endtime = endtime;
+        client.addActivatedservice(this);
+        service.addActivatedservice(this);
+    }
+
     /* Getters and setters */
     public Client getClient() {
         return client;

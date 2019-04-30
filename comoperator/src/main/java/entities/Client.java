@@ -14,9 +14,9 @@ public class Client {
     private int id;
     private String type;
     private String name;
-    private BigDecimal balance;
-    private BigDecimal creditlimit;
-    private Integer credittime;
+    private BigDecimal balance = new BigDecimal(0.00);
+    private BigDecimal creditlimit = new BigDecimal(100.00);
+    private Integer credittime = 5;
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Activatedservice> activatedservices = new ArrayList<Activatedservice>();
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -27,6 +27,20 @@ public class Client {
     private List<Credit> credits = new ArrayList<Credit>();
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Deposit> deposits = new ArrayList<Deposit>();
+
+    public Client() {
+    }
+
+    public Client(String type, String name) {
+        this.type = type;
+        this.name = name;
+    }
+
+    public Client(String type, String name, BigDecimal balance) {
+        this.type = type;
+        this.name = name;
+        this.balance = balance;
+    }
 
     public void addActivatedservice(Activatedservice activatedservice)
     {
@@ -40,10 +54,14 @@ public class Client {
         charge.setClient(this);
     }
 
-    public void addContact(Contact contact)
-    {
+    public void addContact(Contact contact) {
         contacts.add(contact);
         contact.setClient(this);
+    }
+
+    public void addCredit(Credit credit) {
+        credits.add(credit);
+        credit.setClient(this);
     }
 
     public void addDeposit(Deposit deposit)

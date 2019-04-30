@@ -19,6 +19,15 @@ public class Service {
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Charge> charges = new ArrayList<Charge>();
 
+    public Service() {
+    }
+
+    public Service(String name, String description, String tariffdescription) {
+        this.name = name;
+        this.description = description;
+        this.tariffdescription = tariffdescription;
+    }
+
     public void addActivatedservice(Activatedservice activatedservice)
     {
         activatedservices.add(activatedservice);

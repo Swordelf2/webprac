@@ -15,8 +15,23 @@ public class Credit {
     @ManyToOne
     private Client client;
 
-    /* Getters and setters */
+    public Credit() {
+    }
 
+    public Credit(BigDecimal sum, Date startdate, Date enddate) {
+        this.sum = sum;
+        this.startdate = startdate;
+        this.enddate = enddate;
+    }
+
+    public Credit(BigDecimal sum, Date startdate, Date enddate, Client client) {
+        this.sum = sum;
+        this.startdate = startdate;
+        this.enddate = enddate;
+        client.addCredit(this);
+    }
+
+    /* Getters and setters */
     public int getId() {
         return id;
     }

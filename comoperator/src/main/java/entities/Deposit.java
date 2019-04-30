@@ -14,6 +14,20 @@ public class Deposit {
     @ManyToOne
     private Client client;
 
+    public Deposit() {
+    }
+
+    public Deposit(BigDecimal sum, Timestamp time) {
+        this.sum = sum;
+        this.time = time;
+    }
+
+    public Deposit(BigDecimal sum, Timestamp time, Client client) {
+        this.sum = sum;
+        this.time = time;
+        client.addDeposit(this);
+    }
+
     /* Getters and setters */
     public int getId() {
         return id;

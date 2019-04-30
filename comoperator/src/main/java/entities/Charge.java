@@ -18,6 +18,21 @@ public class Charge {
     @ManyToOne
     private Service service;
 
+    public Charge() {
+    }
+
+    public Charge(BigDecimal sum, Timestamp time) {
+        this.sum = sum;
+        this.time = time;
+    }
+
+    public Charge(BigDecimal sum, Timestamp time, Client client, Service service) {
+        this.sum = sum;
+        this.time = time;
+        service.addCharge(this);
+        client.addCharge(this);
+    }
+
     /* Getters and setters */
     public int getId() {
         return id;
